@@ -1,0 +1,55 @@
+{
+  "name": "@100rub/react-responsive",
+  "version": "0.1.3",
+  "private": false,
+  "source": "src/react-responsive.ts",
+  "main": "dist/react-responsive.js",
+  "module": "dist/react-responsive.mjs",
+  "unpkg": "dist/react-responsive.umd.js",
+  "types": "dist/react-responsive.d.ts",
+  "amdName": "ReactResponsive",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^18.0.15",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "microbundle --no-compress --globals react=React --strict",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.0",
+    "typescript": "^4.7.4"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
