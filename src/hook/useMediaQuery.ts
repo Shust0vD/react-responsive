@@ -3,8 +3,14 @@ import { useEffect, useState } from 'react';
 interface queryInterface {
   query: string;
 }
+
+const checkWindow = ({ query }: queryInterface): boolean => {
+  if (typeof window === 'undefined') return false;
+  else return window.matchMedia(query).matches;
+};
+
 export const useMediaQuery = ({ query }: queryInterface): boolean => {
-  const [state, setState] = useState(window.matchMedia(query).matches);
+  const [state, setState] = useState(checkWindow({ query }));
 
   useEffect(() => {
     setState(window.matchMedia(query).matches);
