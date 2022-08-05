@@ -6,7 +6,7 @@ interface queryInterface {
 
 const checkWindow = ({ query }: queryInterface): boolean => {
   if (typeof window === 'undefined') return false;
-  else return window.matchMedia(query).matches;
+  return window.matchMedia(query).matches;
 };
 
 export const useMediaQuery = ({ query }: queryInterface): boolean => {
