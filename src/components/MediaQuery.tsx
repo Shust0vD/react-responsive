@@ -3,8 +3,8 @@ import { useMediaQuery } from '../hook/useMediaQuery';
 
 interface mediaQueryProps {
   orientation?: 'portait' | 'landscape';
-  minResolution?: number | string;
-  maxResolution?: number | string;
+  minResolution?: number | `${number}dppx`;
+  maxResolution?: number | `${number}dppx`;
   minWidth?: number;
   maxWidth?: number;
   minHeight?: number;
@@ -26,9 +26,9 @@ const MediaQuery = ({ children, ...props }: mediaQueryProps) => {
       case 'maxHeight':
         return `(max-height: ${value}px)`;
       case 'minResolution':
-        return `(min-resolution: ${typeof value === 'string' ? value : value + 'dppx'})`;
+        return `(min-resolution: ${typeof value === 'number' ? value + 'dppx' : value})`;
       case 'maxResolution':
-        return `(max-resolution: ${typeof value === 'string' ? value : value + 'dppx'})`;
+        return `(max-resolution: ${typeof value === 'number' ? value + 'dppx' : value})`;
       default:
         return '';
     }
