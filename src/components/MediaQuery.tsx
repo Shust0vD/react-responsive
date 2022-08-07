@@ -42,10 +42,10 @@ const MediaQuery = ({ children, ...props }: mediaQueryProps) => {
   if (!query) return null;
 
   if (typeof children === 'function') {
-    return <div>{children(query)}</div>;
+    return <>{children(query)}</>;
   }
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default MediaQuery;
