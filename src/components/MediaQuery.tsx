@@ -39,11 +39,11 @@ const MediaQuery = ({ children, ...props }: mediaQueryProps) => {
     .join('; ');
   const query = useMediaQuery({ query: line });
 
-  if (!query) return null;
-
   if (typeof children === 'function') {
     return <>{children(query)}</>;
   }
+
+  if (!query) return null;
 
   return <>{children}</>;
 };
