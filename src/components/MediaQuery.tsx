@@ -2,7 +2,7 @@ import React from 'react';
 import { useMediaQuery } from '../hook/useMediaQuery';
 
 interface mediaQueryProps {
-  orientation?: 'portait' | 'landscape';
+  orientation?: 'portrait' | 'landscape';
   minResolution?: number | `${number}dppx`;
   maxResolution?: number | `${number}dppx`;
   minWidth?: number;
