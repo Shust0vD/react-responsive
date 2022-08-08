@@ -17,10 +17,10 @@ export const useMediaQuery = ({ query }: queryInterface): boolean => {
     const changeState = () => {
       setState(window.matchMedia(query).matches);
     };
-    window.addEventListener('resize', changeState);
+    window.matchMedia(query).addEventListener('change', changeState);
 
     return () => {
-      window.removeEventListener('resize', changeState);
+      window.matchMedia(query).removeEventListener('change', changeState);
     };
   }, [query]);
 
