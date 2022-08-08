@@ -1,6 +1,6 @@
 {
   "name": "@100rub/react-responsive",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": false,
   "source": "src/react-responsive.ts",
   "main": "dist/react-responsive.js",

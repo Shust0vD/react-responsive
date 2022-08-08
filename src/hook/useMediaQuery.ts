@@ -1,26 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface queryInterface {
   query: string;
 }
 
+const checkWindow = ({ query }: queryInterface) => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia(query);
+};
+
 export const useMediaQuery = ({ query }: queryInterface): boolean => {
-  const [checkWindowState] = useState<Function>(() => ({ query }: queryInterface): boolean => {
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia(query).matches;
-  });
-  const [state, setState] = useState(checkWindowState({ query }));
+  const checkWindowMemo = useMemo(() => checkWindow({ query }), [query]);
+  const [state, setState] = useState(typeof checkWindowMemo === 'boolean' ? false : checkWindowMemo.matches);
+
+  const changeState = () => {
+    setState(typeof checkWindowMemo === 'boolean' ? false : checkWindowMemo.matches);
+  };
 
   useEffect(() => {
-    setState(window.matchMedia(query).matches);
-
-    const changeState = () => {
-      setState(window.matchMedia(query).matches);
-    };
-    window.matchMedia(query).addEventListener('change', changeState);
+    if (typeof checkWindowMemo !== 'boolean') {
+      setState(checkWindowMemo.matches);
+      checkWindowMemo.addEventListener('change', changeState);
+    }
 
     return () => {
-      window.matchMedia(query).removeEventListener('change', changeState);
+      if (typeof checkWindowMemo !== 'boolean') {
+        checkWindowMemo.removeEventListener('change', changeState);
+      }
     };
   }, [query]);
 
