@@ -4,13 +4,12 @@ interface queryInterface {
   query: string;
 }
 
-const checkWindow = ({ query }: queryInterface): boolean => {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia(query).matches;
-};
-
 export const useMediaQuery = ({ query }: queryInterface): boolean => {
-  const [state, setState] = useState(checkWindow({ query }));
+  const [checkWindowState] = useState<Function>(() => ({ query }: queryInterface): boolean => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia(query).matches;
+  });
+  const [state, setState] = useState(checkWindowState({ query }));
 
   useEffect(() => {
     setState(window.matchMedia(query).matches);
