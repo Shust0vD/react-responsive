@@ -10,25 +10,27 @@ const checkWindow = ({ query }: queryInterface) => {
 };
 
 export const useMediaQuery = ({ query }: queryInterface): boolean => {
-  const checkWindowMemo = useMemo(() => checkWindow({ query }), [query]);
-  const [state, setState] = useState(typeof checkWindowMemo === 'boolean' ? false : checkWindowMemo.matches);
+  const windowMatchMedia = useMemo(() => checkWindow({ query }), [query]);
+  const [mediaResponse, setMediaResponse] = useState(
+    typeof windowMatchMedia === 'boolean' ? false : windowMatchMedia.matches,
+  );
 
   const changeState = () => {
-    setState(typeof checkWindowMemo === 'boolean' ? false : checkWindowMemo.matches);
+    setMediaResponse(typeof windowMatchMedia === 'boolean' ? false : windowMatchMedia.matches);
   };
 
   useEffect(() => {
-    if (typeof checkWindowMemo !== 'boolean') {
-      setState(checkWindowMemo.matches);
-      checkWindowMemo.addEventListener('change', changeState);
+    if (typeof windowMatchMedia !== 'boolean') {
+      setMediaResponse(windowMatchMedia.matches);
+      windowMatchMedia.addEventListener('change', changeState);
     }
 
     return () => {
-      if (typeof checkWindowMemo !== 'boolean') {
-        checkWindowMemo.removeEventListener('change', changeState);
+      if (typeof windowMatchMedia !== 'boolean') {
+        windowMatchMedia.removeEventListener('change', changeState);
       }
     };
   }, [query]);
 
-  return state;
+  return mediaResponse;
 };
